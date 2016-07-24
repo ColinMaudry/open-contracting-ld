@@ -661,8 +661,7 @@
 
 :identifier a owl:FunctionalProperty ;
   rdfs:label "Organization identifier"@en ;
-  rdfs:comment "The primary identifier for this organization. Identifiers that uniquely pick out a legal entity should be preferred. Consult the [organization identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/) for the preferred scheme and identifier to use.",
-  "$ref": "#/definitions/Identifier"@en ;
+  rdfs:comment "The primary identifier for this organization. Identifiers that uniquely pick out a legal entity should be preferred. Consult the [organization identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/) for the preferred scheme and identifier to use."@en ;
   rdfs:range :Identifier ;
   rdfs:domain :Organization .
 
@@ -720,7 +719,7 @@
 
 :quantity a owl:FunctionalProperty ;
   rdfs:label "quantity"@en ;
-  rdfs:comment ""
+  rdfs:comment "The number of units required"@en ;
   rdfs:range xsd:integer ;
   rdfs:domain :Item .
 
@@ -949,9 +948,3 @@
   rdfs:comment "The end date for the period."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Period .
-
-
-
-
-
-#
