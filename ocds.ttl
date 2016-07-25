@@ -60,10 +60,10 @@
 :releaseDate a owl:FunctionalProperty ;
   rdfs:label "Release Date";
   rdfs:comment "The date this information is released, it may well be the same as the parent publishedDate, it must not be later than the publishedDate from the parent package. It is used to determine merge order."@en ;
-  rdfs:range xsd:DateTime ;
+  rdfs:range xsd:dateTime ;
   rdfs:domain :Release .
 
-:tag a owl:ObjectProperty ;
+:tag a owl:FunctionalProperty ;
     rdfs:label "Release Tag"@en;
     rdfs:comment "A value from the [releaseTag codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) that identifies the nature of the release being made. Tags may be used to filter release, or, in future, for for advanced validation when certain kinds of releases should contain certain fields."@en ;
     rdfs:range xsd:string ;
@@ -433,7 +433,7 @@
   rdfs:label "Implementation" ;
   rdfs:comment "Information during the performance / implementation stage of the contract."@en .
 
-:transations a rdfs:ObjectProperty ;
+:transations a owl:ObjectProperty ;
   rdfs:label "Transactions"@en ;
   rdfs:comment "A list of the spending transactions made against this contract"@en ;
   rdfs:range :Transaction ;
@@ -542,7 +542,7 @@
 :documentDateModified a owl:FunctionalProperty ;
   rdfs:label "Document modification date"@en ;
   rdfs:comment "Date that the document was last modified"@en ;
-  rdfs:range xsd:datTime ;
+  rdfs:range xsd:dateTime ;
   rdfs:domain :Document .
 
 :format a owl:FunctionalProperty ;
@@ -731,7 +731,7 @@
 
 ### Unit class and related properties
 
-:Unit a rdfs:class ;
+:Unit a rdfs:Class ;
   rdfs:label "Unit"@en .
 
 :unitName a owl:FunctionalProperty ;
@@ -793,7 +793,7 @@
 :classificationScheme a owl:FunctionalProperty ;
   rdfs:label "Classification scheme"@en ;
   rdfs:comment "An classification should be drawn from an existing scheme or list of codes. This field is used to indicate the scheme/codelist from which the classification is drawn. For line item classifications, this value should represent an known [Item Classification Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) wherever possible."@en ;
-  rdfs:range xsd:strign ;
+  rdfs:range xsd:string ;
   rdfs:domain :Classification .
 
 :classificationId a owl:FunctionalProperty ;
@@ -817,7 +817,7 @@
 ### Identifier class and related properties
 
 :Identifier a rdfs:Class ;
-  rdfs:label "Idenfier"@en .
+  rdfs:label "Identifier"@en .
 
 :identifierScheme a owl:FunctionalProperty ;
   rdfs:label "Identifier scheme"@en ;
