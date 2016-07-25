@@ -22,7 +22,7 @@ The **[OCDS](http://standard.open-contracting.org/latest/en/)** is a data model 
 The first deliverable of this project is an ontology (~ schema) that translates the structure and semantics expressed in the OCDS JSON Schema into RDF.
 
 - [Turtle file](ontology/ocds.ttl)
-- Visualization
+- [Visualization](http://vowl.visualdataweb.org/webvowl/index.html#iri=https://raw.githubusercontent.com/ColinMaudry/open-contracting-ld/master/ocds.ttl)
 - [SPARQL endpoint](dydra.com/colin-maudry/ocds/sparql)
 
 #### A JSON-LD context to turn any data compliant with OCDS JSON Schema into RDF
