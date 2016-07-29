@@ -6,6 +6,8 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+# JSON Schema URL: http://standard.open-contracting.org/latest/en/release-schema.json
+#
 # Pending questions:
 #   - is it allowed to provide several amendments to a tender? The property "amendment" in the schema is not very clear.
 #   - Are tender and procurement synonyms?
@@ -16,6 +18,7 @@
 #   - I don't think it's a good idea to store object identifiers as integers, as they are not supposed to be used for calculations, and expose us to issues such as the disappearance of leading zeros.
 
 # Potential for improvements:
+#   - we should find a way to express cardinality for properties (one or X values).It should only be informative, not directly meant for ontology-driven data validation. See https://github.com/ColinMaudry/open-contracting-ld/issues/1
 #   - adding subPropertyOf to certain properties. Ex: :id subPropertyOf dcterms:identifier.
 #   - instead of xsd:string and xsd:integer, some more specific datatypes would be more accurate in certain cases. especially for the ISO formats.
 #   - When there is a URL in the rdfs:comment, we could add it to the term as rdfs:seeAlso.
@@ -26,8 +29,6 @@
 
 # General comments:
 #   - For each object, required properties are not enforced by the model, and should be enforced at another level.
-#   - owl:FunctionalProperty = n->1 relation
-#   - owl:ObjectProperty = n->n relation
 #   - The list of possible values ("planning", "tender", etc.) is not enforced by the model, and should be enforced at another level.
 #   - I haven't translated the patternProperties into data types.
 #   - When I found properties with identical name for different object types (id, documents, description, etc.) I chose to create a specific property (eg: ocds:tenderId), for the sake of accuracy. I could also have used a generic though more vaguge ocds:id for all objects (Release, Tender, etc.). A benefit of creating specific properties is to have specific rdfs:comment for usage guidance. Some properties could be generic, some should remain specific.
@@ -45,68 +46,68 @@
 :Release a rdfs:Class ;
   rdfs:label "Open Contracting Release"@en .
 
-:ocid a owl:FunctionalProperty ;
+:ocid a rdf:Property ;
   rdfs:label "Open Contracting ID"@en ;
   rdfs:comment "A globally unique identifier for this Open Contracting Process. Composed of a publisher prefix and an identifier for the contracting process. For more information see the [Open Contracting Identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/)"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Release .
 
-:id a owl:FunctionalProperty ;
+:id a rdf:Property ;
   rdfs:label "Release ID";
   rdfs:comment "A unique identifier that identifies this release. A release ID must be unique within a release-package and must not contain the # character."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Release .
 
-:releaseDate a owl:FunctionalProperty ;
+:releaseDate a rdf:Property ;
   rdfs:label "Release Date";
   rdfs:comment "The date this information is released, it may well be the same as the parent publishedDate, it must not be later than the publishedDate from the parent package. It is used to determine merge order."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Release .
 
-:tag a owl:FunctionalProperty ;
+:tag a rdf:Property ;
     rdfs:label "Release Tag"@en;
     rdfs:comment "A value from the [releaseTag codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) that identifies the nature of the release being made. Tags may be used to filter release, or, in future, for for advanced validation when certain kinds of releases should contain certain fields."@en ;
     rdfs:range xsd:string ;
     rdfs:domain :Release .
 
 # The list of possible values ("tender") is not enforced by the model, and should be enforced at another level.
-:initiationType a owl:FunctionalProperty ;
+:initiationType a rdf:Property ;
   rdfs:label "Initiation Type"@en ;
   rdfs:comment "String specifying the type of initiation process used for this contract, taken from the [initiationType](http://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist. Currently only tender is supported."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Release .
 
-:planning a owl:FunctionalProperty ;
+:planning a rdf:Property ;
   rdfs:label "Planning"@en ;
   rdfs:comment "Information from the planning phase of the contracting process. This includes information related to the process of deciding what to contract for, when and how."@en ;
   rdfs:range :Planning ;
   rdfs:domain :Release .
 
-:tender a owl:FunctionalProperty ;
+:tender a rdf:Property ;
     rdfs:label "Tender"@en ;
     rdfs:comment "The activities undertaken in order to enter into a contract."@en ;
     rdfs:range :Tender ;
     rdfs:domain :Release .
 
-:buyer a owl:FunctionalProperty ;
+:buyer a rdf:Property ;
   rdfs:label "Buyer"@en ;
   rdfs:comment "The buyer is the entity whose budget will be used to purchase the goods. This may be different from the procuring agency who may be specified in the tender data."@en ;
   rdfs:range :Buyer ;
   rdfs:domain :Release .
 
-:awards a owl:ObjectProperty ;
+:awards a rdf:Property ;
   rdfs:label "Awards"@en ;
   rdfs:comment "Information from the award phase of the contracting process. There may be more than one award per contracting process e.g. because the contract is split amongst different providers, or because it is a standing offer."@en ;
   rdfs:range :Award ;
   rdfs:domain :Release .
 
-:contracts a owl:ObjectProperty ;
+:contracts a rdf:Property ;
   rdfs:label "Contracts"@en ;
   rdfs:comment "Information from the contract creation phase of the procurement process."@en ;
   rdfs:range :Contract ;
   rdfs:domain :Release .
 
-:releaseLanguage a owl:FunctionalProperty ;
+:releaseLanguage a rdf:Property ;
   rdfs:label "Release language"@en ;
   rdfs:comment "pecifies the default language of the data using either two-digit ISO 639-1, or extended BCP47 language tags. The use of two-letter codes from ISO 639-1 is strongly recommended."@en ;
   rdfs:range xsd:string ;
@@ -118,18 +119,18 @@
   rdfs:label "Planning"@en ;
   rdfs:comment "nformation from the planning phase of the contracting process. Note that many other fields may be filled in a planning release, in the appropriate fields in other schema sections, these would likely be estimates at this stage e.g. totalValue in tender"@en .
 
-:budget a owl:FunctionalProperty ;
+:budget a rdf:Property ;
   rdfs:label "Budget"@en ;
   rdfs:range :Budget ;
   rdfs:domain :Planning .
 
-:planningRationale a owl:FunctionalProperty ;
+:planningRationale a rdf:Property ;
   rdfs:label "Planning rationale"@en ;
   rdfs:comment "The rationale for the procurement provided in free text. More detail can be provided in an attached document."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Planning .
 
-:documents a owl:ObjectProperty ;
+:documents a rdf:Property ;
   rdfs:label "Documents"@en ;
   rdfs:comment "A list of documents related to the planning process."@en ;
   rdfs:range :Document ;
@@ -141,143 +142,143 @@
   rdfs:label "Tender"@en ;
   rdfs:comment "Data regarding tender process - publicly inviting prospective contractors to submit bids for evaluation and selecting a winner or winners"@en .
 
-:tenderId a owl:FunctionalProperty ;
+:tenderId a rdf:Property ;
   rdfs:label "Tender ID"@en ;
   rdfs:comment "An identifier for this tender process. This may be the same as the ocid, or may be drawn from an internally held identifier for this tender."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Tender .
 
-:tenderTitle a owl:FunctionalProperty ;
+:tenderTitle a rdf:Property ;
   rdfs:label "Tender title"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:tenderDescription a owl:FunctionalProperty ;
+:tenderDescription a rdf:Property ;
   rdfs:label "Tender description" ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:tenderStatus a owl:FunctionalProperty ;
+:tenderStatus a rdf:Property ;
   rdfs:label "Tender Status"@en ;
   rdfs:comment "The current status of the tender based on the [tenderStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#tender-status)"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:tenderItems a owl:ObjectProperty ;
+:tenderItems a rdf:Property ;
   rdfs:label "Items to be procured"@en ;
   rdfs:comment "The goods and services to be purchased, broken into line items wherever possible. Items should not be duplicated, but a quantity of 2 specified instead."@en ;
   rdfs:range :Item ;
   rdfs:domain :Tender .
 
-:minValue a owl:FunctionalProperty ;
+:minValue a rdf:Property ;
   rdfs:label "Minimum value"@en ;
   rdfs:comment "The minimum estimated value of the procurement."@en ;
   rdfs:range :Value ;
   rdfs:domain :Tender .
 
-:tenderValue a owl:FunctionalProperty ;
+:tenderValue a rdf:Property ;
   rdfs:label "Tender value"@en ;
   rdfs:comment "The total upper estimated value of the procurement."@en ;
   rdfs:range :Value ;
   rdfs:domain :Tender .
 
-:procurementMethod a owl:FunctionalProperty ;
+:procurementMethod a rdf:Property ;
   rdfs:label "Procurement method"@en ;
   rdfs:comment "Specify tendering method against the [method codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#method) as per [GPA definitions](http://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm) of Open, Selective, Limited"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:procurementMethodRationale a owl:FunctionalProperty ;
+:procurementMethodRationale a rdf:Property ;
   rdfs:label "Procurement method rationale"@en ;
   rdfs:comment "Rationale of procurement method, especially in the case of Limited tendering."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:awardCriteria a owl:FunctionalProperty ;
+:awardCriteria a rdf:Property ;
   rdfs:label "Award criteria"@en ;
   rdfs:comment "Specify the award criteria for the procurement, using the [award criteria codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#award-criteria)"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:awardCriteriaDetails a owl:FunctionalProperty ;
+:awardCriteriaDetails a rdf:Property ;
   rdfs:label "Award criteria details"@en ;
   rdfs:comment "Any detailed or further information on the award or selection criteria."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:submissionMethod a owl:ObjectProperty ;
+:submissionMethod a rdf:Property ;
   rdfs:label "Submission method"@en ;
   rdfs:comment "pecify the method by which bids must be submitted, in person, written, or electronic auction. Using the [submission method codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#submission-method)"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:submissionMethodDetails a owl:FunctionalProperty ;
+:submissionMethodDetails a rdf:Property ;
   rdfs:label "Submission method details"@en ;
   rdfs:comment "Any detailed or further information on the submission method. This may include the address, e-mail address or online service to which bids should be submitted, and any special requirements to be followed for submissions."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:tenderPeriod a owl:FunctionalProperty ;
+:tenderPeriod a rdf:Property ;
   rdfs:label "Tender period"@en ;
   rdfs:comment "The period when the tender is open for submissions. The end date is the closing date for tender submissions."@en ;
   rdfs:range :Period ;
   rdfs:domain :Tender .
 
-:enquiryPeriod a owl:FunctionalProperty ;
+:enquiryPeriod a rdf:Property ;
   rdfs:label "Enquiry period"@en ;
   rdfs:comment "The period during which enquiries may be made and answered."@en ;
   rdfs:range :Period ;
   rdfs:domain :Tender .
 
-:hasEnquiries a owl:FunctionalProperty ;
+:hasEnquiries a rdf:Property ;
   rdfs:label "Has enquiries"@en ;
   rdfs:comment " Yes/No field to indicate whether enquiries were part of tender process."@en ;
   rdfs:range xsd:boolean ;
   rdfs:domain :Tender .
 
-:eligibilityCriteria a owl:FunctionalProperty ;
+:eligibilityCriteria a rdf:Property ;
   rdfs:label "Eligibility criteria"@en ;
   rdfs:comment "A description of any eligibility criteria for potential suppliers."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Tender .
 
-:awardPeriod a owl:FunctionalProperty ;
+:awardPeriod a rdf:Property ;
   rdfs:label "Award period"@en ;
   rdfs:comment "The date or period on which an award is anticipated to be made."@en ;
   rdfs:range :Period ;
   rdfs:domain :Tender .
 
-:numberOfTenderers a owl:FunctionalProperty ;
+:numberOfTenderers a rdf:Property ;
   rdfs:label "Number of tenders"@en ;
   rdfs:comment "The number of entities who submit a tender."@en ;
   rdfs:range xsd:integer ;
   rdfs:domain :Tender .
 
-:tenderers a owl:FunctionalProperty ;
+:tenderers a rdf:Property ;
   rdfs:label "Tenderers"@en ;
   rdfs:comment "All entities who submit a tender."@en ;
   rdfs:range :Organization ;
   rdfs:domain :Tender .
 
-:procuringEntity a owl:FunctionalProperty ;
+:procuringEntity a rdf:Property ;
   rdfs:label "Procuring entity"@en ;
   rdfs:comment "The entity managing the procurement, which may be different from the buyer who is paying / using the items being procured."@en ;
   rdfs:range :Organization ;
   rdfs:domain :Tender .
 
-:tenderDocuments a owl:ObjectProperty ;
+:tenderDocuments a rdf:Property ;
   rdfs:label "Tender documents"@en ;
   rdfs:comment "All documents and attachments related to the tender, including any notices. See the [documentType codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#document-type) for details of potential documents to include."@en ;
   rdfs:range :Document ;
   rdfs:domain :Tender .
 
-:milestones a owl:ObjectProperty ;
+:milestones a rdf:Property ;
   rdfs:label "Milestones"@en ;
   rdfs:comment "A list of milestones associated with the tender."@en ;
   rdfs:range :Milestone ;
   rdfs:domain :Tender .
 
-:tenderAmendment a owl:ObjectProperty ;
+:tenderAmendment a rdf:Property ;
   rdfs:label "Tender amendment"@en ;
   rdfs:comment ""@en ;
   rdfs:range :Amendment ;
@@ -289,65 +290,65 @@
   rdfs:label "Award"@en ;
   rdfs:comment "An award for the given procurement. There may be more than one award per contracting process e.g. because the contract is split amongst different providers, or because it is a standing offer."@en .
 
-:awardId a owl:FunctionalProperty ;
+:awardId a rdf:Property ;
   rdfs:label "Award ID"@en ;
   rdfs:comment "The identifier for this award. It must be unique and cannot change within the Open Contracting Process it is part of (defined by a single ocid). See the [identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/) for further details."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Award .
 
-:awardTitle a owl:FunctionalProperty ;
+:awardTitle a rdf:Property ;
   rdfs:label "Award title"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Award .
 
-:awardDescription a owl:FunctionalProperty ;
+:awardDescription a rdf:Property ;
   rdfs:label "Award description" ;
   rdfs:range xsd:string ;
   rdfs:domain :Award .
 
-:awardStatus a owl:FunctionalProperty ;
+:awardStatus a rdf:Property ;
   rdfs:label "Award status" ;
   rdfs:comment "The current status of the award drawn from the [awardStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#award-status)" ;
   rdfs:range xsd:string ;
   rdfs:domain :Award .
 
-:awardDate a owl:FunctionalProperty ;
+:awardDate a rdf:Property ;
   rdfs:label "Award date"@en ;
   rdfs:comment "The date of the contract award. This is usually the date on which a decision to award was made.";
   rdfs:range xsd:dateTime ;
   rdfs:domain :Award .
 
-:awardValue a owl:FunctionalProperty ;
+:awardValue a rdf:Property ;
   rdfs:label "Award value"@en ;
   rdfs:comment "The total value of this award. In the case of a framework contract this may be the total estimated lifetime value, or maximum value, of the agreement. There may be more than one award per procurement."@en ;
   rdfs:range :Value ;
   rdfs:domain :Award .
 
-:suppliers a owl:ObjectProperty ;
+:suppliers a rdf:Property ;
   rdfs:label "Suppliers"@en ;
   rdfs:comment "The suppliers awarded this award. If different suppliers have been awarded different items of values, these should be split into separate award blocks."@en ;
   rdfs:range :Organization ;
   rdfs:domain :Award .
 
-:awardItems a owl:ObjectProperty ;
+:awardItems a rdf:Property ;
   rdfs:label "Items Awarded"@en ;
   rdfs:comment "The goods and services awarded in this award, broken into line items wherever possible. Items should not be duplicated, but the quantity specified instead."@en ;
   rdfs:range :Item ;
   rdfs:domain :Award .
 
-:contractPeriod a owl:FunctionalProperty ;
+:contractPeriod a rdf:Property ;
   rdfs:label "Contract period"@en ;
   rdfs:comment "The period for which the contract has been awarded."@en ;
   rdfs:range :Period ;
   rdfs:domain :Award .
 
-:awardDocuments a owl:ObjectProperty ;
+:awardDocuments a rdf:Property ;
   rdfs:label "Award documents"@en ;
   rdfs:comment "All documents and attachments related to the award, including any notices."@en ;
   rdfs:range :Document ;
   rdfs:domain :Award .
 
-:awardAmendment a owl:ObjectProperty ;
+:awardAmendment a rdf:Property ;
   rdfs:label "Award amendment"@en ;
   rdfs:range :Amendment ;
   rdfs:domain :Award .
@@ -358,70 +359,70 @@
   rdfs:label "Contract"@en ;
   rdfs:comment "Information regarding the signed contract between the buyer and supplier(s)."@en .
 
-:contractId a owl:FunctionalProperty ;
+:contractId a rdf:Property ;
   rdfs:label "Contract ID"@en ;
   rdfs:comment "The identifier for this contract. It must be unique and cannot change within its Open Contracting Process (defined by a single ocid). See the [identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/) for further details."@en ;
   rdfs:range xsd:integer, xsd:string ;
   rdfs:domain :Contract .
 
-:awardID a owl:FunctionalProperty ;
+:awardID a rdf:Property ;
   rdfs:label "Award ID"@en ;
   rdfs:comment "The award against which this contract is being issued."@en ;
   rdfs:range :Award ;
   rdfs:domain :Contract .
 
-:contractTitle a owl:FunctionalProperty ;
+:contractTitle a rdf:Property ;
   rdfs:label "Contract title" ;
   rdfs:range xsd:string ;
   rdfs:domain :Contract .
 
-:contractDescription a owl:FunctionalProperty ;
+:contractDescription a rdf:Property ;
   rdfs:label "Contract description"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Contract .
 
-:contractStatus a owl:FunctionalProperty ;
+:contractStatus a rdf:Property ;
   rdfs:label "Contract status"@en ;
   rdfs:comment "The current status of the contract. Drawn from the [contractStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#contract-status)"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Contract .
 
-:contractPeriod a owl:FunctionalProperty ;
+:contractPeriod a rdf:Property ;
   rdfs:label "Contract period"@en ;
   rdfs:comment "The start and end date for the contract."@en ;
   rdfs:range :Period ;
   rdfs:domain :Contract .
 
-:contractValue a owl:FunctionalProperty ;
+:contractValue a rdf:Property ;
   rdfs:label "Contract value"@en ;
   rdfs:comment "The total value of this contract."@en ;
   rdfs:range :Value ;
   rdfs:domain :Contract .
 
-:contractItems a owl:ObjectProperty ;
+:contractItems a rdf:Property ;
   rdfs:label "Items Contracted"@en ;
   rdfs:comment "The goods, services, and any intangible outcomes in this contract. Note: If the items are the same as the award do not repeat."@en ;
   rdfs:range :Item ;
   rdfs:domain :Contract .
 
-:dateSigned a owl:FunctionalProperty ;
+:dateSigned a rdf:Property ;
   rdfs:label "Date of signature"@en ;
   rdfs:comment "The date the contract was signed. In the case of multiple signatures, the date of the last signature."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Contract .
 
-:contractDocuments a owl:ObjectProperty ;
+:contractDocuments a rdf:Property ;
   rdfs:label "Contract documents"@en ;
   rdfs:description "All documents and attachments related to the contract, including any notices."@en ;
   rdfs:range :Document ;
   rdfs:domain :Contract .
 
-:contractAmendment a owl:ObjectProperty ;
+:contractAmendment a rdf:Property ;
   rdfs:label "Contract amendment"@en ;
   rdfs:range :Amendment ;
   rdfs:domain :Contract .
 
-:implementation a owl:FunctionalProperty ;
+:implementation a rdf:Property ;
   rdfs:label "Implementation"@en ;
   rdfs:comment "Information related to the implementation of the contract in accordance with the obligations laid out therein."@en ;
   rdfs:range :Implementation ;
@@ -433,19 +434,19 @@
   rdfs:label "Implementation" ;
   rdfs:comment "Information during the performance / implementation stage of the contract."@en .
 
-:transations a owl:ObjectProperty ;
+:transations a rdf:Property ;
   rdfs:label "Transactions"@en ;
   rdfs:comment "A list of the spending transactions made against this contract"@en ;
   rdfs:range :Transaction ;
   rdfs:domain :Implementation .
 
-:implementationMilestones a owl:ObjectProperty ;
+:implementationMilestones a rdf:Property ;
   rdfs:label "Implementation milestones"@en ;
   rdfs:comment "As milestones are completed, milestone completions should be documented."@en ;
   rdfs:range :Milestone ;
   rdfs:domain :Implementation .
 
-:implementationDocuments a owl:ObjectProperty ;
+:implementationDocuments a rdf:Property ;
   rdfs:label "Implementation documents"@en ;
   rdfs:comment "Documents and reports that are part of the implementation phase e.g. audit and evaluation reports."@en ;
   rdfs:range :Document ;
@@ -456,42 +457,42 @@
 :Milestone a rdfs:Class ;
   rdfs:label "Milestone"@en .
 
-:milestoneId a owl:FunctionalProperty ;
+:milestoneId a rdf:Property ;
   rdfs:label "Milestone ID"@en ;
   rdfs:comment "A local identifier for this milestone, unique within this block. This field is used to keep track of multiple revisions of a milestone through the compilation from release to record mechanism."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Milestone .
 
-:milestoneTitle a owl:FunctionalProperty ;
+:milestoneTitle a rdf:Property ;
   rdfs:label "Milestone title"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Milestone .
 
-:milestoneDescription a owl:FunctionalProperty ;
+:milestoneDescription a rdf:Property ;
   rdfs:label "Milestone description"@en ;
   rdfs:comment "A description of the milestone."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Milestone .
 
-:dueDate a owl:FunctionalProperty ;
+:dueDate a rdf:Property ;
   rdfs:label "Due date"@en ;
   rdfs:comment "The date the milestone is due."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Milestone .
 
-:milestoneDateModified a owl:FunctionalProperty ;
+:milestoneDateModified a rdf:Property ;
   rdfs:label "Milestone modification date"@en ;
   rdfs:comment "The date the milestone was last reviewed or modified and the status was altered or confirmed to still be correct."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Milestone .
 
-:milestoneStatus a owl:FunctionalProperty ;
+:milestoneStatus a rdf:Property ;
   rdfs:label "Milestone status"@en ;
   rdfs:comment "The status that was realized on the date provided in dateModified, drawn from the [milestoneStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#milestone-status)."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Milestone .
 
-:milestoneDocuments a owl:ObjectProperty ;
+:milestoneDocuments a rdf:Property ;
   rdfs:label "Milestone documents"@en ;
   rdfs:commnent "List of documents associated with this milestone."@en ;
   rdfs:range :Document ;
@@ -503,55 +504,55 @@
   rdfs:label "Document"@en ;
   rdfs:comment "Links to, or descriptions of, external documents can be attached at various locations within the standard. Documents may be supporting information, formal notices, downloadable forms, or any other kind of resource that should be made public as part of full open contracting."@en .
 
-:documentId a owl:FunctionalProperty ;
+:documentId a rdf:Property ;
   rdfs:label "Document ID"@en ;
   rdfs:comment "A local, unique identifier for this document. This field is used to keep track of multiple revisions of a document through the compilation from release to record mechanism."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Document .
 
-:documentType a owl:FunctionalProperty ;
+:documentType a rdf:Property ;
   rdfs:label "Document type"@en ;
   rdfs:comment "A classification of the document described taken from the [documentType codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#document-type). Values from the provided codelist should be used wherever possible, though extended values can be provided if the codelist does not have a relevant code."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Document .
 
-:documentTitle a owl:FunctionalProperty ;
+:documentTitle a rdf:Property ;
   rdfs:label "Document title"@en ;
   rdfs:comment "The document title."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Document .
 
-:documentDescription a owl:FunctionalProperty ;
+:documentDescription a rdf:Property ;
   rdfs:label "Document description"@en ;
   rdfs:comment "A short description of the document. We recommend descriptions do not exceed 250 words. In the event the document is not accessible online, the description field can be used to describe arrangements for obtaining a copy of the document."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Document .
 
-:documentUrl a owl:FunctionalProperty ;
+:documentUrl a rdf:Property ;
   rdfs:label "Document URL"@en ;
   rdfs:comment "Direct link to the document or attachment. The server providing access to this document should be configured to correctly report the document mime type."@en ;
   rdfs:range rdf:Resource ;
   rdfs:domain :Document .
 
-:datePublished a owl:FunctionalProperty ;
+:datePublished a rdf:Property ;
   rdfs:label "Publication date"@en ;
   rdfs:comment "The date on which the document was first published. This is particularly important for legally important documents such as notices of a tender."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Document .
 
-:documentDateModified a owl:FunctionalProperty ;
+:documentDateModified a rdf:Property ;
   rdfs:label "Document modification date"@en ;
   rdfs:comment "Date that the document was last modified"@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Document .
 
-:format a owl:FunctionalProperty ;
+:format a rdf:Property ;
   rdfs:label "Format"@en ;
   rdfs:comment "The format of the document taken from the [IANA Media Types code list](http://www.iana.org/assignments/media-types/), with the addition of one extra value for 'offline/print', used when this document entry is being used to describe the offline publication of a document. Use values from the template column. Links to web pages should be tagged 'text/html'."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Document .
 
-:documentLanguage a owl:FunctionalProperty ;
+:documentLanguage a rdf:Property ;
   rdfs:label "Document language"@en ;
   rdfs:comment "Specifies the language of the linked document using either two-digit [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), or extended [BCP47 language tags](http://www.w3.org/International/articles/language-tags/). The use of two-letter codes from [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is strongly recommended unless there is a clear user need for distinguishing the language subtype."@en ;
   rdfs:range xsd:string ;
@@ -563,43 +564,43 @@
   rdfs:label "Budget"@en ;
   rdfs:comment "This section contain information about the budget line, and associated projects, through which this contracting process is funded. It draws upon data model of the [Budget Data Package](https://github.com/openspending/budget-data-package/blob/master/specification.md), and should be used to cross-reference to more detailed information held using a Budget Data Package, or, where no linked Budget Data Package is available, to provide enough information to allow a user to manually or automatically cross-reference with another published source of budget and project information."@en .
 
-:BudgetSource a owl:FunctionalProperty ;
+:BudgetSource a rdf:Property ;
   rdfs:label "Transaction Data Source"@en ;
   rdfs:comment "Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here." ;
   rdfs:range rdf:Resource ;
   rdfs:domain :Budget .
 
-:budgetId a owl:FunctionalProperty ;
+:budgetId a rdf:Property ;
   rdfs:label "Budget ID"@en ;
   rdfs:comment "An identifier for the budget line item which provides funds for this contracting process. This identifier should be possible to cross-reference against the provided data source."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Budget .
 
-:budgetDescription a owl:FunctionalProperty ;
+:budgetDescription a rdf:Property ;
   rdfs:label "Budget Source"@en ;
   rdfs:comment "A short free text description of the budget source. May be used to provide the title of the budget line, or the programme used to fund this project."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Budget .
 
-:budgetAmount a owl:FunctionalProperty ;
+:budgetAmount a rdf:Property ;
   rdfs:label "Budget amount"@en ;
   rdfs:comment "The value of the budget line item."@en ;
   rdfs:range :Value ;
   rdfs:domain :Budget .
 
-:project a owl:FunctionalProperty ;
+:project a rdf:Property ;
   rdfs:label "Project Title"@en ;
   rdfs:comment "The name of the project that through which this contracting process is funded (if applicable). Some organizations maintain a registry of projects, and the data should use the name by which the project is known in that registry. No translation option is offered for this string, as translated values can be provided in third-party data, linked from the data source above."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Budget .
 
-:projectID a owl:FunctionalProperty ;
+:projectID a rdf:Property ;
   rdfs:label "Project Identifier"@en ;
   rdfs:comment "An external identifier for the project that this contracting process forms part of, or is funded via (if applicable). Some organizations maintain a registry of projects, and the data should use the identifier from the relevant registry of projects."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Budget .
 
-:budgetUri a owl:FunctionalProperty ;
+:budgetUri a rdf:Property ;
   rdfs:label "Linked budget information"@en ;
   rdfs:comment "A URI pointing directly to a machine-readable record about the related budget or projects for this contracting process."@en ;
   rdfs:range rdf:Resource ;
@@ -611,43 +612,43 @@
   rdfs:label "Transaction Information"@en ;
   rdfs:comment "A spending transaction related to the contracting process. Draws upon the data models of the [Budget Data Package](https://github.com/openspending/budget-data-package/blob/master/specification.md) and the [International Aid Transpareny Initiative](http://iatistandard.org/activity-standard/iati-activities/iati-activity/transaction/) and should be used to cross-reference to more detailed information held using a Budget Data Package, IATI file, or to provide enough information to allow a user to manually or automatically cross-reference with some other published source of transactional spending data."@en .
 
-:transactionId a owl:FunctionalProperty ;
+:transactionId a rdf:Property ;
   rdfs:label "Transaction ID"@en ;
   rdfs:comment "A unique identifier for this transaction. This identifier should be possible to cross-reference against the provided data source. For the budget data package this is the id, for IATI, the transaction reference."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Transaction .
 
-:transactionSource a owl:FunctionalProperty ;
+:transactionSource a rdf:Property ;
   rdfs:label "Transaction Data Source"@en ;
   rdfs:comment "Used to point either to a corresponding Budget Data Package, IATI file, or machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here."@en ;
   rdfs:range rdf:Resource ;
   rdfs:domain :Transaction .
 
-:transactionDate a owl:FunctionalProperty ;
+:transactionDate a rdf:Property ;
   rdfs:label "Transaction date"@en ;
   rdfs:comment "The date of the transaction"@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Transaction .
 
-:transactionAmount a owl:FunctionalProperty ;
+:transactionAmount a rdf:Property ;
   rdfs:label "Transaction amount"@en ;
   rdfs:comment "The value of the transaction."@en ;
   rdfs:range :Value ;
   rdfs:domain :Transaction .
 
-:providerOrganization a owl:FunctionalProperty ;
+:providerOrganization a rdf:Property ;
   rdfs:label "Provider organization"@en ;
   rdfs:comment "The Organization Identifier for the organization from which the funds in this transaction originate. Expressed following the Organizational Identifier standard - consult the documentation and the codelist."@en ;
   rdfs:range :Identifier ;
   rdfs:domain :Transaction .
 
-:receiverOrganization a owl:FunctionalProperty ;
+:receiverOrganization a rdf:Property ;
   rdfs:label "Receiver organization"@en ;
   rdfs:comment "The Organization Identifier for the organization which receives the funds in this transaction. Expressed following the Organizational Identifier standard - consult the documentation and the codelist."@en ;
   rdfs:range :Identifier ;
   rdfs:domain :Transaction .
 
-:transactionUri a owl:FunctionalProperty ;
+:transactionUri a rdf:Property ;
   rdfs:label "Linked spending information"@en ;
   rdfs:comment "A URI pointing directly to a machine-readable record about this spending transaction."@en ;
   rdfs:range rdf:Resource ;
@@ -659,30 +660,30 @@
   rdfs:label "Organization"@en ;
   rdfs:comment "An organization."@en .
 
-:identifier a owl:FunctionalProperty ;
+:identifier a rdf:Property ;
   rdfs:label "Organization identifier"@en ;
   rdfs:comment "The primary identifier for this organization. Identifiers that uniquely pick out a legal entity should be preferred. Consult the [organization identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/) for the preferred scheme and identifier to use."@en ;
   rdfs:range :Identifier ;
   rdfs:domain :Organization .
 
-:additionalIdentifiers a owl:ObjectProperty ;
+:additionalIdentifiers a rdf:Property ;
   rdfs:label "Additional identifiers"@en ;
   rdfs:comment "A list of additional / supplemental identifiers for the organization, using the [organization identifier guidance](http://standard.open-contracting.org/latest/en/schema/identifiers/). This could be used to provide an internally used identifier for this organization in addition to the primary legal entity identifier."@en ;
   rdfs:range :Identifier ;
   rdfs:domain :Organization .
 
-:organizationName a owl:FunctionalProperty ;
+:organizationName a rdf:Property ;
   rdfs:label "Organization name"@en ;
   rdfs:comment "The common name of the organization. The ID property provides an space for the formal legal name, and so this may either repeat that value, or could provide the common name by which this organization is known. This field could also include details of the department or sub-unit involved in this contracting process."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Organization .
 
-:address a owl:FunctionalProperty ;
+:address a rdf:Property ;
   rdfs:label "Address"@en ;
   rdfs:range :Address ;
   rdfs:domain :Organization .
 
-:contactPoint a owl:FunctionalProperty ;
+:contactPoint a rdf:Property ;
   rdfs:label "Contact point"@en ;
   rdfs:range :ContactPoint ;
   rdfs:domain :Organization .
@@ -693,37 +694,37 @@
   rdfs:label "Item"@en ;
   rdfs:comment "A good, service, or work to be contracted."@en .
 
-:itemId a owl:FunctionalProperty ;
+:itemId a rdf:Property ;
   rdfs:label "Item ID"@en ;
   rdfs:comment "A local identifier to reference and merge the items by. Must be unique within a given array of items."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Item .
 
-:itemDescription a owl:FunctionalProperty ;
+:itemDescription a rdf:Property ;
   rdfs:label "Item description"@en ;
   rdfs:comment "A description of the goods, services to be provided."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Item .
 
-:classification a owl:FunctionalProperty ;
+:classification a rdf:Property ;
   rdfs:label "Classification"@en ;
   rdfs:comment "The primary classification for the item. See the [itemClassificationScheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) to identify preferred classification lists, including CPV and GSIN."@en ;
   rdfs:range :Classification ;
   rdfs:domain :Item .
 
-:additionalClassifications a owl:ObjectProperty ;
+:additionalClassifications a rdf:Property ;
   rdfs:label "Additional classifications"@en ;
   rdfs:comment "An array of additional classifications for the item. See the [itemClassificationScheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) codelist for common options to use in OCDS. This may also be used to present codes from an internal classification scheme."@en ;
   rdfs:range :Classification ;
   rdfs:domain :Item .
 
-:quantity a owl:FunctionalProperty ;
+:quantity a rdf:Property ;
   rdfs:label "quantity"@en ;
   rdfs:comment "The number of units required"@en ;
   rdfs:range xsd:integer ;
   rdfs:domain :Item .
 
-:unit a owl:FunctionalProperty ;
+:unit a rdf:Property ;
   rdfs:label "Unit"@en ;
   rdfs:comment "Description of the unit which the good comes in e.g. hours, kilograms. Made up of a unit name, and the value of a single unit."@en ;
   rdfs:range :Unit ;
@@ -734,13 +735,13 @@
 :Unit a rdfs:Class ;
   rdfs:label "Unit"@en .
 
-:unitName a owl:FunctionalProperty ;
+:unitName a rdf:Property ;
   rdfs:label "Unit name"@en ;
   rdfs:comment "Name of the unit"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Unit .
 
-:unitValue a owl:FunctionalProperty ;
+:unitValue a rdf:Property ;
   rdfs:label "Unit value"@en ;
   rdfs:range :Value ;
   rdfs:domain :Unit .
@@ -750,19 +751,19 @@
 :Amendment a rdfs:Class ;
   rdfs:label "Amendment"@en .
 
-:amendmentDate a owl:FunctionalProperty ;
+:amendmentDate a rdf:Property ;
   rdfs:label "Amendment Date"@en ;
   rdfs:comment "The data of this amendment."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Amendment .
 
-:changes a owl:ObjectProperty ;
+:changes a rdf:Property ;
   rdfs:label "Amended fields"@en ;
   rdfs:comment "Comma-separated list of affected fields."@en ;
   rdfs:range :Change ;
   rdfs:domain :Amendment .
 
-:amendmentRationale a owl:FunctionalProperty ;
+:amendmentRationale a rdf:Property ;
   rdfs:label "Amendment rationale"@en ;
   rdfs:comment "An explanation for the amendment."@en ;
   rdfs:range xsd:string ;
@@ -773,13 +774,13 @@
 :Change a rdfs:Class ;
   rdfs:label "Change"@en .
 
-:property a owl:FunctionalProperty ;
+:property a rdf:Property ;
   rdfs:label "Property"@en ;
   rdfs:comment "The property name that has been changed relative to the place the amendment is. For example if the contract value has changed, then the property under changes within the contract.amendment would be value.amount."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Change .
 
-:former_value a owl:FunctionalProperty ;
+:former_value a rdf:Property ;
   rdfs:label "Former value"@en ;
   rdfs:comment "he previous value of the changed property, in whatever type the property is."@en ;
   rdfs:range xsd:string, rdf:Resource, xsd:Integer ;
@@ -790,25 +791,25 @@
 :Classification a rdfs:Class ;
   rdfs:label "Classification"@en .
 
-:classificationScheme a owl:FunctionalProperty ;
+:classificationScheme a rdf:Property ;
   rdfs:label "Classification scheme"@en ;
   rdfs:comment "An classification should be drawn from an existing scheme or list of codes. This field is used to indicate the scheme/codelist from which the classification is drawn. For line item classifications, this value should represent an known [Item Classification Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) wherever possible."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Classification .
 
-:classificationId a owl:FunctionalProperty ;
+:classificationId a rdf:Property ;
   rdfs:label "Classification ID"@en ;
   rdfs:comment "The classification code drawn from the selected scheme."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Classification .
 
-:classificationDescription a owl:FunctionalProperty ;
+:classificationDescription a rdf:Property ;
   rdfs:label "Classification description"@en ;
   rdfs:comment "A textual description or title for the code."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Classification .
 
-:classificationUri a owl:FunctionalProperty ;
+:classificationUri a rdf:Property ;
   rdfs:label "Classification URI"@en ;
   rdfs:comment "A URI to identify the code. In the event individual URIs are not available for items in the identifier scheme this value should be left blank."@en ;
   rdfs:range rdf:Resource ;
@@ -819,25 +820,25 @@
 :Identifier a rdfs:Class ;
   rdfs:label "Identifier"@en .
 
-:identifierScheme a owl:FunctionalProperty ;
+:identifierScheme a rdf:Property ;
   rdfs:label "Identifier scheme"@en ;
   rdfs:comment "Organization identifiers be drawn from an existing identification scheme. This field is used to indicate the scheme or codelist in which the identifier will be found. This value should be drawn from the [Organization Identifier Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme)."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Identifier .
 
-:identifierId a owl:FunctionalProperty ;
+:identifierId a rdf:Property ;
   rdfs:label "Identifier ID"@en ;
   rdfs:comment "The identifier of the organization in the selected scheme."@en ;
   rdfs:range xsd:string, xsd:integer ;
   rdfs:domain :Identifier .
 
-:legalName a owl:FunctionalProperty ;
+:legalName a rdf:Property ;
   rdfs:label "Legal name"@en ;
   rdfs:comment "The legally registered name of the organization."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Identifier .
 
-:identifierUri a owl:FunctionalProperty ;
+:identifierUri a rdf:Property ;
   rdfs:label "Identifier URI"@en ;
   rdfs:comment "A URI to identify the organization, such as those provided by [Open Corporates](http://www.opencorporates.com) or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the url field of the Organization contact point."@en ;
   rdfs:range rdf:Resource ;
@@ -849,31 +850,31 @@
   rdfs:label "Address"@en ;
   rdfs:comment "An address. This may be the legally registered address of the organization, or may be a correspondence address for this particular contracting process."@en .
 
-:streeAddress a owl:FunctionalProperty ;
+:streeAddress a rdf:Property ;
   rdfs:label "Street address"@en ;
   rdfs:comment "The street address. For example, 1600 Amphitheatre Pkwy"@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Address .
 
-:locality a owl:FunctionalProperty ;
+:locality a rdf:Property ;
   rdfs:label "Locality"@en ;
   rdfs:comment "The locality. For example, Mountain View."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Address .
 
-:region a owl:FunctionalProperty ;
+:region a rdf:Property ;
   rdfs:label "Region"@en ;
   rdfs:comment "The region. For example, CA."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Address .
 
-:postalCode a owl:FunctionalProperty ;
+:postalCode a rdf:Property ;
   rdfs:label "Postal code"@en ;
   rdfs:comment "The postal code. For example, 94043."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :Address .
 
-:countryName a owl:FunctionalProperty ;
+:countryName a rdf:Property ;
   rdfs:label "Country name"@en ;
   rdfs:comment "The country name. For example, United States."@en ;
   rdfs:range xsd:string ;
@@ -885,31 +886,31 @@
   rdfs:label "Contact point"@en ;
   rdfs:comment "An person, contact point or department to contact in relation to this contracting process."@en .
 
-:contactPointName a owl:FunctionalProperty ;
+:contactPointName a rdf:Property ;
   rdfs:label "Contact point name"@en ;
   rdfs:comment "The name of the contact person, department, or contact point, for correspondence relating to this contracting process."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :ContactPoint .
 
-:email a owl:FunctionalProperty ;
+:email a rdf:Property ;
   rdfs:label "Email"@en ;
   rdfs:comment "The e-mail address of the contact point/person."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :ContactPoint .
 
-:telephone a owl:FunctionalProperty ;
+:telephone a rdf:Property ;
   rdfs:label "Telephone"@en ;
   rdfs:comment "The telephone number of the contact point/person. This should include the international dialling code."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :ContactPoint .
 
-:faxNumber a owl:FunctionalProperty ;
+:faxNumber a rdf:Property ;
   rdfs:label "Fax number"@en ;
   rdfs:comment "The fax number of the contact point/person. This should include the international dialling code."@en ;
   rdfs:range xsd:string ;
   rdfs:domain :ContactPoint .
 
-:contactPointUrl a owl:FunctionalProperty ;
+:contactPointUrl a rdf:Property ;
   rdfs:label "Contact point URL"@en ;
   rdfs:comment "A web address for the contact point/person."@en ;
   rdfs:range rdf:Resource ;
@@ -920,13 +921,13 @@
 :Value a rdfs:Class ;
   rdfs:label "Value"@en .
 
-:valueAmount a owl:FunctionalProperty ;
+:valueAmount a rdf:Property ;
   rdfs:label "Amount"@en ;
   rdfs:comment "Amount as a number."@en ;
   rdfs:range xsd:integer ;
   rdfs:domain :Value .
 
-:currency a owl:FunctionalProperty ;
+:currency a rdf:Property ;
   rdfs:label "Currency"@en ;
   rdfs:comment "The currency in 3-letter ISO 4217 format."@en ;
   rdfs:range xsd:string ;
@@ -937,13 +938,13 @@
 :Period a rdfs:Class ;
   rdfs:label "Period"@en .
 
-:startDate a owl:FunctionalProperty ;
+:startDate a rdf:Property ;
   rdfs:label "Start date"@en ;
   rdfs:comment "The start date for the period."@en ;
   rdfs:range xsd:dateTime ;
   rdfs:domain :Period .
 
-:endDate a owl:FunctionalProperty ;
+:endDate a rdf:Property ;
   rdfs:label "End date"@en ;
   rdfs:comment "The end date for the period."@en ;
   rdfs:range xsd:dateTime ;
