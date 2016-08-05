@@ -21,10 +21,6 @@
 # #################################################################
 # 
 # 
-# http://www.w3.org/2000/01/rdf-schema#commnent
-
-rdfs:commnent a owl:AnnotationProperty .
-# 
 # http://www.w3.org/2000/01/rdf-schema#description
 
 rdfs:description a owl:AnnotationProperty .
@@ -432,7 +428,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#BudgetSource
 
-:BudgetSource a owl:DatatypeProperty ;
+:BudgetSource a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here." ;
@@ -448,7 +444,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#amendmentRationale
 
-:amendmentRationale a owl:DatatypeProperty ;
+:amendmentRationale a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Amendment ;
 	rdfs:range xsd:string ;
 	rdfs:comment "An explanation for the amendment."@en ;
@@ -510,15 +506,15 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#budgetDescription
 
-:budgetDescription a owl:DatatypeProperty ;
+:budgetDescription a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range xsd:string ;
 	rdfs:comment "A short free text description of the budget source. May be used to provide the title of the budget line, or the programme used to fund this project."@en ;
-	rdfs:label "Budget Source"@en .
+	rdfs:label "Budget Description"@en .
 # 
 # http://w3id.org/ocds/ns#budgetId
 
-:budgetId a owl:DatatypeProperty ;
+:budgetId a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "An identifier for the budget line item which provides funds for this contracting process. This identifier should be possible to cross-reference against the provided data source."@en ;
@@ -526,7 +522,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#budgetUri
 
-:budgetUri a owl:DatatypeProperty ;
+:budgetUri a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "A URI pointing directly to a machine-readable record about the related budget or projects for this contracting process."@en ;
@@ -534,7 +530,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#classificationDescription
 
-:classificationDescription a owl:DatatypeProperty ;
+:classificationDescription a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Classification ;
 	rdfs:range xsd:string ;
 	rdfs:comment "A textual description or title for the code."@en ;
@@ -542,7 +538,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#classificationId
 
-:classificationId a owl:DatatypeProperty ;
+:classificationId a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Classification ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "The classification code drawn from the selected scheme."@en ;
@@ -550,7 +546,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#classificationScheme
 
-:classificationScheme a owl:DatatypeProperty ;
+:classificationScheme a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Classification ;
 	rdfs:range xsd:string ;
 	rdfs:comment "An classification should be drawn from an existing scheme or list of codes. This field is used to indicate the scheme/codelist from which the classification is drawn. For line item classifications, this value should represent an known [Item Classification Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) wherever possible."@en ;
@@ -558,7 +554,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#classificationUri
 
-:classificationUri a owl:DatatypeProperty ;
+:classificationUri a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Classification ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "A URI to identify the code. In the event individual URIs are not available for items in the identifier scheme this value should be left blank."@en ;
@@ -566,7 +562,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#contactPointName
 
-:contactPointName a owl:DatatypeProperty ;
+:contactPointName a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :ContactPoint ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The name of the contact person, department, or contact point, for correspondence relating to this contracting process."@en ;
@@ -574,7 +570,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#contactPointUrl
 
-:contactPointUrl a owl:DatatypeProperty ;
+:contactPointUrl a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :ContactPoint ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "A web address for the contact point/person."@en ;
@@ -612,7 +608,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#countryName
 
-:countryName a owl:DatatypeProperty ;
+:countryName a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Address ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The country name. For example, United States."@en ;
@@ -620,7 +616,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#currency
 
-:currency a owl:DatatypeProperty ;
+:currency a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Value ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The currency in 3-letter ISO 4217 format."@en ;
@@ -628,7 +624,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#datePublished
 
-:datePublished a owl:DatatypeProperty ;
+:datePublished a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:dateTime ;
 	rdfs:comment "The date on which the document was first published. This is particularly important for legally important documents such as notices of a tender."@en ;
@@ -644,7 +640,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentDateModified
 
-:documentDateModified a owl:DatatypeProperty ;
+:documentDateModified a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:dateTime ;
 	rdfs:comment "Date that the document was last modified"@en ;
@@ -652,7 +648,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentDescription
 
-:documentDescription a owl:DatatypeProperty ;
+:documentDescription a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:string ;
 	rdfs:comment "A short description of the document. We recommend descriptions do not exceed 250 words. In the event the document is not accessible online, the description field can be used to describe arrangements for obtaining a copy of the document."@en ;
@@ -668,7 +664,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentLanguage
 
-:documentLanguage a owl:DatatypeProperty ;
+:documentLanguage a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:string ;
 	rdfs:comment "Specifies the language of the linked document using either two-digit [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), or extended [BCP47 language tags](http://www.w3.org/International/articles/language-tags/). The use of two-letter codes from [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is strongly recommended unless there is a clear user need for distinguishing the language subtype."@en ;
@@ -676,7 +672,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentTitle
 
-:documentTitle a owl:DatatypeProperty ;
+:documentTitle a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The document title."@en ;
@@ -684,7 +680,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentType
 
-:documentType a owl:DatatypeProperty ;
+:documentType a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:string ;
 	rdfs:comment "A classification of the document described taken from the [documentType codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#document-type). Values from the provided codelist should be used wherever possible, though extended values can be provided if the codelist does not have a relevant code."@en ;
@@ -692,7 +688,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentUrl
 
-:documentUrl a owl:DatatypeProperty ;
+:documentUrl a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "Direct link to the document or attachment. The server providing access to this document should be configured to correctly report the document mime type."@en ;
@@ -716,7 +712,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#email
 
-:email a owl:DatatypeProperty ;
+:email a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :ContactPoint ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The e-mail address of the contact point/person."@en ;
@@ -724,7 +720,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#endDate
 
-:endDate a owl:DatatypeProperty ;
+:endDate a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Period ;
 	rdfs:range xsd:dateTime ;
 	rdfs:comment "The end date for the period."@en ;
@@ -732,7 +728,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#faxNumber
 
-:faxNumber a owl:DatatypeProperty ;
+:faxNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :ContactPoint ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The fax number of the contact point/person. This should include the international dialling code."@en ;
@@ -740,7 +736,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#format
 
-:format a owl:DatatypeProperty ;
+:format a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The format of the document taken from the [IANA Media Types code list](http://www.iana.org/assignments/media-types/), with the addition of one extra value for 'offline/print', used when this document entry is being used to describe the offline publication of a document. Use values from the template column. Links to web pages should be tagged 'text/html'."@en ;
@@ -748,7 +744,7 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#former_value
 
-:former_value a owl:DatatypeProperty ;
+:former_value a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Change ;
 	rdfs:range _:genid1 .
 
@@ -788,7 +784,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#identifierId
 
-:identifierId a owl:DatatypeProperty ;
+:identifierId a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Identifier ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "The identifier of the organization in the selected scheme."@en ;
@@ -796,7 +792,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#identifierScheme
 
-:identifierScheme a owl:DatatypeProperty ;
+:identifierScheme a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Identifier ;
 	rdfs:range xsd:string ;
 	rdfs:comment "Organization identifiers be drawn from an existing identification scheme. This field is used to indicate the scheme or codelist in which the identifier will be found. This value should be drawn from the [Organization Identifier Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme)."@en ;
@@ -804,7 +800,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#identifierUri
 
-:identifierUri a owl:DatatypeProperty ;
+:identifierUri a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Identifier ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "A URI to identify the organization, such as those provided by [Open Corporates](http://www.opencorporates.com) or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the url field of the Organization contact point."@en ;
@@ -820,7 +816,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#itemDescription
 
-:itemDescription a owl:DatatypeProperty ;
+:itemDescription a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Item ;
 	rdfs:range xsd:string ;
 	rdfs:comment "A description of the goods, services to be provided."@en ;
@@ -828,7 +824,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#itemId
 
-:itemId a owl:DatatypeProperty ;
+:itemId a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Item ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "A local identifier to reference and merge the items by. Must be unique within a given array of items."@en ;
@@ -836,7 +832,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#legalName
 
-:legalName a owl:DatatypeProperty ;
+:legalName a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Identifier ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The legally registered name of the organization."@en ;
@@ -844,7 +840,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#locality
 
-:locality a owl:DatatypeProperty ;
+:locality a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Address ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The locality. For example, Mountain View."@en ;
@@ -907,7 +903,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#organizationName
 
-:organizationName a owl:DatatypeProperty ;
+:organizationName a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Organization ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The common name of the organization. The ID property provides an space for the formal legal name, and so this may either repeat that value, or could provide the common name by which this organization is known. This field could also include details of the department or sub-unit involved in this contracting process."@en ;
@@ -923,7 +919,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#postalCode
 
-:postalCode a owl:DatatypeProperty ;
+:postalCode a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Address ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The postal code. For example, 94043."@en ;
@@ -947,7 +943,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#project
 
-:project a owl:DatatypeProperty ;
+:project a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The name of the project that through which this contracting process is funded (if applicable). Some organizations maintain a registry of projects, and the data should use the name by which the project is known in that registry. No translation option is offered for this string, as translated values can be provided in third-party data, linked from the data source above."@en ;
@@ -955,7 +951,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#projectID
 
-:projectID a owl:DatatypeProperty ;
+:projectID a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "An external identifier for the project that this contracting process forms part of, or is funded via (if applicable). Some organizations maintain a registry of projects, and the data should use the identifier from the relevant registry of projects."@en ;
@@ -963,7 +959,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#property
 
-:property a owl:DatatypeProperty ;
+:property a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Change ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The property name that has been changed relative to the place the amendment is. For example if the contract value has changed, then the property under changes within the contract.amendment would be value.amount."@en ;
@@ -971,7 +967,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#quantity
 
-:quantity a owl:DatatypeProperty ;
+:quantity a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Item ;
 	rdfs:range xsd:integer ;
 	rdfs:comment "The number of units required"@en ;
@@ -979,7 +975,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#region
 
-:region a owl:DatatypeProperty ;
+:region a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Address ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The region. For example, CA."@en ;
@@ -1003,7 +999,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#startDate
 
-:startDate a owl:DatatypeProperty ;
+:startDate a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Period ;
 	rdfs:range xsd:dateTime ;
 	rdfs:comment "The start date for the period."@en ;
@@ -1011,7 +1007,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#streeAddress
 
-:streeAddress a owl:DatatypeProperty ;
+:streeAddress a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Address ;
 	rdfs:range xsd:string ;
 	rdfs:comment "The street address. For example, 1600 Amphitheatre Pkwy"@en ;
@@ -1019,7 +1015,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#submissionMethod
 
-:submissionMethod a owl:DatatypeProperty ;
+:submissionMethod a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Tender ;
 	rdfs:range xsd:string ;
 	rdfs:comment "pecify the method by which bids must be submitted, in person, written, or electronic auction. Using the [submission method codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#submission-method)"@en ;
@@ -1081,7 +1077,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#transactionDate
 
-:transactionDate a owl:DatatypeProperty ;
+:transactionDate a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
 	rdfs:range xsd:dateTime ;
 	rdfs:comment "The date of the transaction"@en ;
@@ -1089,7 +1085,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#transactionId
 
-:transactionId a owl:DatatypeProperty ;
+:transactionId a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
 	rdfs:range xsd:integer , xsd:string ;
 	rdfs:comment "A unique identifier for this transaction. This identifier should be possible to cross-reference against the provided data source. For the budget data package this is the id, for IATI, the transaction reference."@en ;
@@ -1097,7 +1093,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#transactionSource
 
-:transactionSource a owl:DatatypeProperty ;
+:transactionSource a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "Used to point either to a corresponding Budget Data Package, IATI file, or machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here."@en ;
@@ -1105,7 +1101,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#transactionUri
 
-:transactionUri a owl:DatatypeProperty ;
+:transactionUri a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
 	rdfs:range rdf:Resource ;
 	rdfs:comment "A URI pointing directly to a machine-readable record about this spending transaction."@en ;
@@ -1113,7 +1109,7 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#unitName
 
-:unitName a owl:DatatypeProperty ;
+:unitName a owl:DatatypeProperty , owl:FunctionalProperty ;
 	rdfs:domain :Unit ;
 	rdfs:range xsd:string ;
 	rdfs:comment "Name of the unit"@en ;
