@@ -12,18 +12,6 @@
 	dcterms:license <https://creativecommons.org/licenses/by/2.0/> ;
 	foaf:homepage <https://github.com/ColinMaudry/open-contracting-ld> ;
 	dcterms:title "Schema for an Open Contracting Release"@en .
-# 
-# 
-# #################################################################
-# #
-# #    Annotation properties
-# #
-# #################################################################
-# 
-# 
-# http://www.w3.org/2000/01/rdf-schema#description
-
-rdfs:description a owl:AnnotationProperty .
 
 # 
 # 
@@ -171,7 +159,7 @@ rdfs:description a owl:AnnotationProperty .
 :contractDocuments a owl:ObjectProperty ;
 	rdfs:domain :Contract ;
 	rdfs:range :Document ;
-	rdfs:description "All documents and attachments related to the contract, including any notices."@en ;
+	rdfs:comment "All documents and attachments related to the contract, including any notices."@en ;
 	rdfs:label "Contract documents"@en .
 # 
 # http://w3id.org/ocds/ns#contractItems
