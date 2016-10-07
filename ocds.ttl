@@ -382,9 +382,9 @@ rdfs:description a owl:AnnotationProperty .
 	rdfs:comment "The value of the transaction."@en ;
 	rdfs:label "Transaction amount"@en .
 # 
-# http://w3id.org/ocds/ns#transations
+# http://w3id.org/ocds/ns#transactions
 
-:transations a owl:ObjectProperty ;
+:transactions a owl:ObjectProperty ;
 	rdfs:domain :Implementation ;
 	rdfs:range :Transaction ;
 	rdfs:comment "A list of the spending transactions made against this contract"@en ;
