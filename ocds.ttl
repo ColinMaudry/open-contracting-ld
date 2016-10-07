@@ -24,19 +24,7 @@
 # http://www.w3.org/2000/01/rdf-schema#description
 
 rdfs:description a owl:AnnotationProperty .
-# 
-# 
-# 
-# #################################################################
-# #
-# #    Datatypes
-# #
-# #################################################################
-# 
-# 
-# http://www.w3.org/1999/02/22-rdf-syntax-ns#Resource
 
-rdf:Resource a rdfs:Datatype .
 # 
 # 
 # 
@@ -428,11 +416,11 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#BudgetSource
 
-:BudgetSource a owl:DatatypeProperty , owl:FunctionalProperty ;
+:BudgetSource a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
-	rdfs:range rdf:Resource ;
+	rdfs:range rdfs:Resource ;
 	rdfs:comment "Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here." ;
-	rdfs:label "Transaction Data Source"@en .
+	rdfs:label "Budget Data Source"@en .
 # 
 # http://w3id.org/ocds/ns#amendmentDate
 
@@ -522,9 +510,9 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#budgetUri
 
-:budgetUri a owl:DatatypeProperty , owl:FunctionalProperty ;
+:budgetUri a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Budget ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "A URI pointing directly to a machine-readable record about the related budget or projects for this contracting process."@en ;
 	rdfs:label "Linked budget information"@en .
 # 
@@ -554,9 +542,9 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#classificationUri
 
-:classificationUri a owl:DatatypeProperty , owl:FunctionalProperty ;
+:classificationUri a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Classification ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "A URI to identify the code. In the event individual URIs are not available for items in the identifier scheme this value should be left blank."@en ;
 	rdfs:label "Classification URI"@en .
 # 
@@ -570,9 +558,9 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#contactPointUrl
 
-:contactPointUrl a owl:DatatypeProperty , owl:FunctionalProperty ;
+:contactPointUrl a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :ContactPoint ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "A web address for the contact point/person."@en ;
 	rdfs:label "Contact point URL"@en .
 # 
@@ -688,9 +676,9 @@ rdf:Resource a rdfs:Datatype .
 # 
 # http://w3id.org/ocds/ns#documentUrl
 
-:documentUrl a owl:DatatypeProperty , owl:FunctionalProperty ;
+:documentUrl a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Document ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "Direct link to the document or attachment. The server providing access to this document should be configured to correctly report the document mime type."@en ;
 	rdfs:label "Document URL"@en .
 # 
@@ -752,7 +740,7 @@ _:genid1 a rdfs:Datatype ;
 	owl:unionOf _:genid4 .
 
 _:genid4 a rdf:List ;
-	rdf:first rdf:Resource ;
+	rdf:first rdfs:Resource ;
 	rdf:rest _:genid3 .
 
 _:genid3 a rdf:List ;
@@ -800,9 +788,9 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#identifierUri
 
-:identifierUri a owl:DatatypeProperty , owl:FunctionalProperty ;
+:identifierUri a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Identifier ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "A URI to identify the organization, such as those provided by [Open Corporates](http://www.opencorporates.com) or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the url field of the Organization contact point."@en ;
 	rdfs:label "Identifier URI"@en .
 # 
@@ -1093,17 +1081,17 @@ _:genid2 a rdf:List ;
 # 
 # http://w3id.org/ocds/ns#transactionSource
 
-:transactionSource a owl:DatatypeProperty , owl:FunctionalProperty ;
+:transactionSource a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
-	rdfs:range rdf:Resource ;
+	rdfs:range rdfs:Resource ;
 	rdfs:comment "Used to point either to a corresponding Budget Data Package, IATI file, or machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here."@en ;
 	rdfs:label "Transaction Data Source"@en .
 # 
 # http://w3id.org/ocds/ns#transactionUri
 
-:transactionUri a owl:DatatypeProperty , owl:FunctionalProperty ;
+:transactionUri a owl:ObjectProperty , owl:FunctionalProperty ;
 	rdfs:domain :Transaction ;
-	rdfs:range rdf:Resource ;
+	rdfs:range dcterms:URI ;
 	rdfs:comment "A URI pointing directly to a machine-readable record about this spending transaction."@en ;
 	rdfs:label "Linked spending information"@en .
 # 
