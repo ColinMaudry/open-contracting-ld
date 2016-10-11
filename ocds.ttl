@@ -31,24 +31,6 @@
 dcterms:title rdf:type owl:AnnotationProperty .
 
 
-
-
-
-#################################################################
-#
-#    Datatypes
-#
-#################################################################
-
-
-###  http://org.semanticweb.owlapi/error#Error5
-
-<http://org.semanticweb.owlapi/error#Error5> rdf:type rdfs:Datatype .
-
-
-
-
-
 #################################################################
 #
 #    Object Properties
@@ -261,7 +243,7 @@ dcterms:title rdf:type owl:AnnotationProperty .
        
        rdfs:comment "The buyer is the entity whose budget will be used to purchase the goods. This may be different from the procuring agency who may be specified in the tender data."@en ;
        
-       rdfs:range :Buyer ;
+       rdfs:range :Organization ;
        
        rdfs:domain :Release .
 
@@ -283,7 +265,8 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 ###  http://w3id.org/ocds/ns#classification
 
-:classification rdf:type owl:ObjectProperty ;
+:classification rdf:type owl:FunctionalProperty ,
+                         owl:ObjectProperty ;
                 
                 rdfs:label "Classification"@en ;
                 
@@ -830,7 +813,8 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 ###  http://w3id.org/ocds/ns#unit
 
-:unit rdf:type owl:ObjectProperty ;
+:unit rdf:type owl:FunctionalProperty ,
+               owl:ObjectProperty ;
       
       rdfs:label "Unit"@en ;
       
@@ -1058,7 +1042,7 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 ###  http://w3id.org/ocds/ns#classificationScheme
 
-:classificationScheme rdf:type owl:DatatypeProperty ,
+:classificationScheme rdf:type owl:ObjectProperty ,
                                owl:FunctionalProperty ;
                       
                       rdfs:label "Classification scheme"@en ;
@@ -1067,7 +1051,7 @@ dcterms:title rdf:type owl:AnnotationProperty .
                       
                       rdfs:domain :Classification ;
                       
-                      rdfs:range xsd:string .
+                      rdfs:range :ItemClassificationScheme .
 
 
 
@@ -1395,12 +1379,9 @@ dcterms:title rdf:type owl:AnnotationProperty .
               
               rdfs:domain :Change ;
               
-              rdfs:range [ rdf:type rdfs:Datatype ;
-                           owl:unionOf ( <http://org.semanticweb.owlapi/error#Error5>
-                                         xsd:integer
-                                         xsd:string
-                                       )
-                         ] .
+              rdfs:range rdfs:Resource ,
+                         xsd:integer ,
+                         xsd:string .
 
 
 
@@ -1841,9 +1822,9 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
-###  http://w3id.org/ocds/ns#streeAddress
+###  http://w3id.org/ocds/ns#streetAddress
 
-:streeAddress rdf:type owl:DatatypeProperty ,
+:streetAddress rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
               
               rdfs:label "Street address"@en ;
@@ -2068,13 +2049,6 @@ dcterms:URI rdf:type owl:Class .
         rdfs:label "Budget"@en ;
         
         rdfs:comment "This section contain information about the budget line, and associated projects, through which this contracting process is funded. It draws upon data model of the [Budget Data Package](https://github.com/openspending/budget-data-package/blob/master/specification.md), and should be used to cross-reference to more detailed information held using a Budget Data Package, or, where no linked Budget Data Package is available, to provide enough information to allow a user to manually or automatically cross-reference with another published source of budget and project information."@en .
-
-
-
-###  http://w3id.org/ocds/ns#Buyer
-
-:Buyer rdf:type owl:Class .
-
 
 
 ###  http://w3id.org/ocds/ns#Change
