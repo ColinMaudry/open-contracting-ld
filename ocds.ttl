@@ -166,6 +166,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
+###  http://w3id.org/ocds/ns#awardStatus
+
+:awardStatus rdf:type owl:FunctionalProperty ,
+                      owl:ObjectProperty ;
+             
+             rdfs:label "Award status" ;
+             
+             rdfs:comment "The current status of the award drawn from the [awardStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#award-status)" ;
+             
+             rdfs:domain :Award ;
+             
+             rdfs:range :AwardStatus .
+
+
+
 ###  http://w3id.org/ocds/ns#awardValue
 
 :awardValue rdf:type owl:FunctionalProperty ,
@@ -395,6 +410,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
+###  http://w3id.org/ocds/ns#contractStatus
+
+:contractStatus rdf:type owl:FunctionalProperty ,
+                         owl:ObjectProperty ;
+                
+                rdfs:label "Contract status"@en ;
+                
+                rdfs:comment "The current status of the contract. Drawn from the [contractStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#contract-status)"@en ;
+                
+                rdfs:domain :Contract ;
+                
+                rdfs:range :ContractStatus .
+
+
+
 ###  http://w3id.org/ocds/ns#contractValue
 
 :contractValue rdf:type owl:FunctionalProperty ,
@@ -555,6 +585,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
+###  http://w3id.org/ocds/ns#initiationType
+
+:initiationType rdf:type owl:FunctionalProperty ,
+                         owl:ObjectProperty ;
+                
+                rdfs:label "Initiation Type"@en ;
+                
+                rdfs:comment "String specifying the type of initiation process used for this contract, taken from the [initiationType](http://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist. Currently only tender is supported."@en ;
+                
+                rdfs:range :InitiationType ;
+                
+                rdfs:domain :Release .
+
+
+
 ###  http://w3id.org/ocds/ns#milestoneDocuments
 
 :milestoneDocuments rdf:type owl:ObjectProperty ;
@@ -610,6 +655,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
           rdfs:range :Planning ;
           
           rdfs:domain :Release .
+
+
+
+###  http://w3id.org/ocds/ns#procurementMethod
+
+:procurementMethod rdf:type owl:FunctionalProperty ,
+                            owl:ObjectProperty ;
+                   
+                   rdfs:label "Procurement method"@en ;
+                   
+                   rdfs:comment "Specify tendering method against the [method codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#method) as per [GPA definitions](http://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm) of Open, Selective, Limited"@en ;
+                   
+                   rdfs:range :Method ;
+                   
+                   rdfs:domain :Tender .
 
 
 
@@ -754,6 +814,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
               rdfs:range :Period ;
               
               rdfs:domain :Tender .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatus
+
+:tenderStatus rdf:type owl:FunctionalProperty ,
+                       owl:ObjectProperty ;
+              
+              rdfs:label "Tender Status"@en ;
+              
+              rdfs:comment "The current status of the tender based on the [tenderStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#tender-status)"@en ;
+              
+              rdfs:domain :Tender ;
+              
+              rdfs:range :TenderStatus .
 
 
 
@@ -983,21 +1058,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
-###  http://w3id.org/ocds/ns#awardStatus
-
-:awardStatus rdf:type owl:DatatypeProperty ,
-                      owl:FunctionalProperty ;
-             
-             rdfs:label "Award status" ;
-             
-             rdfs:comment "The current status of the award drawn from the [awardStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#award-status)" ;
-             
-             rdfs:domain :Award ;
-             
-             rdfs:range xsd:string .
-
-
-
 ###  http://w3id.org/ocds/ns#awardTitle
 
 :awardTitle rdf:type owl:DatatypeProperty ,
@@ -1114,21 +1174,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
             
             rdfs:range xsd:integer ,
                        xsd:string .
-
-
-
-###  http://w3id.org/ocds/ns#contractStatus
-
-:contractStatus rdf:type owl:DatatypeProperty ,
-                         owl:FunctionalProperty ;
-                
-                rdfs:label "Contract status"@en ;
-                
-                rdfs:comment "The current status of the contract. Drawn from the [contractStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#contract-status)"@en ;
-                
-                rdfs:domain :Contract ;
-                
-                rdfs:range xsd:string .
 
 
 
@@ -1447,21 +1492,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
-###  http://w3id.org/ocds/ns#initiationType
-
-:initiationType rdf:type owl:DatatypeProperty ,
-                         owl:FunctionalProperty ;
-                
-                rdfs:label "Initiation Type"@en ;
-                
-                rdfs:comment "String specifying the type of initiation process used for this contract, taken from the [initiationType](http://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist. Currently only tender is supported."@en ;
-                
-                rdfs:domain :Release ;
-                
-                rdfs:range xsd:string .
-
-
-
 ###  http://w3id.org/ocds/ns#itemDescription
 
 :itemDescription rdf:type owl:DatatypeProperty ,
@@ -1669,21 +1699,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
             rdfs:domain :Address ;
             
             rdfs:range xsd:string .
-
-
-
-###  http://w3id.org/ocds/ns#procurementMethod
-
-:procurementMethod rdf:type owl:DatatypeProperty ,
-                            owl:FunctionalProperty ;
-                   
-                   rdfs:label "Procurement method"@en ;
-                   
-                   rdfs:comment "Specify tendering method against the [method codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#method) as per [GPA definitions](http://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm) of Open, Selective, Limited"@en ;
-                   
-                   rdfs:domain :Tender ;
-                   
-                   rdfs:range xsd:string .
 
 
 
@@ -1911,21 +1926,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
-###  http://w3id.org/ocds/ns#tenderStatus
-
-:tenderStatus rdf:type owl:DatatypeProperty ,
-                       owl:FunctionalProperty ;
-              
-              rdfs:label "Tender Status"@en ;
-              
-              rdfs:comment "The current status of the tender based on the [tenderStatus codelist](http://standard.open-contracting.org/latest/en/schema/codelists/#tender-status)"@en ;
-              
-              rdfs:domain :Tender ;
-              
-              rdfs:range xsd:string .
-
-
-
 ###  http://w3id.org/ocds/ns#tenderTitle
 
 :tenderTitle rdf:type owl:DatatypeProperty ,
@@ -2043,6 +2043,24 @@ dcterms:URI rdf:type owl:Class .
 
 
 
+###  http://w3id.org/ocds/ns#AwardStatus
+
+:AwardStatus rdf:type owl:Class ;
+             
+             rdfs:label "Codelist Award Status"@en ;
+             
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:oneOf ( :awardStatusPending
+                                               :awardStatusCancelled
+                                               :awardStatusActive
+                                               :awardStatusUnsuccessful
+                                             )
+                                 ] ;
+             
+             rdfs:comment "An award move through multiple states. Releases over time may update the status of an award."@en .
+
+
+
 ###  http://w3id.org/ocds/ns#Budget
 
 :Budget rdf:type owl:Class ;
@@ -2089,6 +2107,24 @@ dcterms:URI rdf:type owl:Class .
 
 
 
+###  http://w3id.org/ocds/ns#ContractStatus
+
+:ContractStatus rdf:type owl:Class ;
+                
+                rdfs:label "Codelist Contract Status"@en ;
+                
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:oneOf ( :contractStatusPending
+                                                  :contractStatusCancelled
+                                                  :contractStatusActive
+                                                  :contractStatusTerminated
+                                                )
+                                    ] ;
+                
+                rdfs:comment "Contracts can move through multiple states. Releases over time may update the status of a contract."@en .
+
+
+
 ###  http://w3id.org/ocds/ns#Document
 
 :Document rdf:type owl:Class ;
@@ -2117,6 +2153,21 @@ dcterms:URI rdf:type owl:Class .
 
 
 
+###  http://w3id.org/ocds/ns#InitiationType
+
+:InitiationType rdf:type owl:Class ;
+                
+                rdfs:label "Codelist Initiation Type"@en ;
+                
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:oneOf ( :initiationTypeTender
+                                                )
+                                    ] ;
+                
+                rdfs:comment "Contracting processes may be formed under a number of different processes. Currently, only ‘tender’ is supported in this codelist. Future versions of the standard may support other Initiation Types. The initiation type may be provide information to consuming applications on the different blocks of data and releases they should expect from a contracting process."@en .
+
+
+
 ###  http://w3id.org/ocds/ns#Item
 
 :Item rdf:type owl:Class ;
@@ -2130,6 +2181,23 @@ dcterms:URI rdf:type owl:Class .
 ###  http://w3id.org/ocds/ns#ItemClassificationScheme
 
 :ItemClassificationScheme rdf:type owl:Class .
+
+
+
+###  http://w3id.org/ocds/ns#Method
+
+:Method rdf:type owl:Class ;
+        
+        rdfs:label "Codelist Method"@en ;
+        
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:oneOf ( :methodOpen
+                                          :methodLimited
+                                          :methodSelective
+                                        )
+                            ] ;
+        
+        rdfs:comment "The method codelist is based upon the GPA Definitions provided here."@en .
 
 
 
@@ -2216,6 +2284,25 @@ dcterms:URI rdf:type owl:Class .
 
 
 
+###  http://w3id.org/ocds/ns#TenderStatus
+
+:TenderStatus rdf:type owl:Class ;
+              
+              rdfs:label "Codelist Tender Status"@en ;
+              
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:oneOf ( :tenderStatusUnsuccessful
+                                                :tenderStatusPlanned
+                                                :tenderStatusComplete
+                                                :tenderStatusActive
+                                                :tenderStatusCancelled
+                                              )
+                                  ] ;
+              
+              rdfs:comment "The tender.status field is used to indicate the current status of a tender process."@en .
+
+
+
 ###  http://w3id.org/ocds/ns#Transaction
 
 :Transaction rdf:type owl:Class ;
@@ -2255,6 +2342,110 @@ rdfs:Resource rdf:type owl:Class .
 #    Individuals
 #
 #################################################################
+
+
+###  http://w3id.org/ocds/ns#awardStatusActive
+
+:awardStatusActive rdf:type :AwardStatus ,
+                            owl:NamedIndividual ;
+                   
+                   rdfs:label "active"@en ;
+                   
+                   dcterms:title "Active"@en ;
+                   
+                   rdfs:comment "This award has been made, and is currently in force."@en .
+
+
+
+###  http://w3id.org/ocds/ns#awardStatusCancelled
+
+:awardStatusCancelled rdf:type :AwardStatus ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "cancelled"@en ;
+                      
+                      dcterms:title "Cancelled"@en ;
+                      
+                      rdfs:comment "This award has been cancelled."@en .
+
+
+
+###  http://w3id.org/ocds/ns#awardStatusPending
+
+:awardStatusPending rdf:type :AwardStatus ,
+                             owl:NamedIndividual ;
+                    
+                    rdfs:label "pending"@en ;
+                    
+                    dcterms:title "Pending"@en ;
+                    
+                    rdfs:comment "This award has been proposed, but is not yet in force. This may be due to a cooling off period, or some other process."@en .
+
+
+
+###  http://w3id.org/ocds/ns#awardStatusUnsuccessful
+
+:awardStatusUnsuccessful rdf:type :AwardStatus ,
+                                  owl:NamedIndividual ;
+                         
+                         rdfs:label "unsuccessful"@en ;
+                         
+                         rdfs:comment "This award could not be successfully made. If items or supplier details are included within the award section, then these narrow the scope of the unsuccessful award (i.e. the award of noted items, or an award to the noted supplier, was unsuccessful, but there may be other successful awards for different items listed in the tender, or to different suppliers)."@en ;
+                         
+                         dcterms:title "Unsuccessful"@en .
+
+
+
+###  http://w3id.org/ocds/ns#contractStatusActive
+
+:contractStatusActive rdf:type :ContractStatus ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "active"@en ;
+                      
+                      dcterms:title "Active"@en ;
+                      
+                      rdfs:comment "This contract has been signed by all the parties, and is now legally in force."@en .
+
+
+
+###  http://w3id.org/ocds/ns#contractStatusCancelled
+
+:contractStatusCancelled rdf:type :ContractStatus ,
+                                  owl:NamedIndividual ;
+                         
+                         rdfs:label "cancelled"@en ;
+                         
+                         dcterms:title "Cancelled"@en ;
+                         
+                         rdfs:comment "This contract has been cancelled prior to being signed."@en .
+
+
+
+###  http://w3id.org/ocds/ns#contractStatusPending
+
+:contractStatusPending rdf:type :ContractStatus ,
+                                owl:NamedIndividual ;
+                       
+                       rdfs:label "pending"@en ;
+                       
+                       dcterms:title "Pending"@en ;
+                       
+                       rdfs:comment "This contract has been proposed, but is not yet in force. It may be awaiting signature."@en .
+
+
+
+###  http://w3id.org/ocds/ns#contractStatusTerminated
+
+:contractStatusTerminated rdf:type :ContractStatus ,
+                                   owl:NamedIndividual ;
+                          
+                          rdfs:label "terminated"@en ;
+                          
+                          dcterms:title "Terminated"@en ;
+                          
+                          rdfs:comment "This contract was signed and in force, and has now come to a close. This may be due to successful completion of the contract, or may be early termination due to some non-completion."@en .
+
 
 
 ###  http://w3id.org/ocds/ns#ics_CPV
@@ -2306,6 +2497,58 @@ rdfs:Resource rdf:type owl:Class .
             rdfs:comment "The United Nations Standard Products and Services Code (UNSPSC) is a hierarchical convention that is used to classify all products and services. Machine readable meta-data for UNSPSC is not provided as open data: and so publishers should consider alternative classification shemes that do provide open data lookup tables wherever possible."@en ;
             
             dcterms:title "United Nations Standard Products and Services Code®"@en .
+
+
+
+###  http://w3id.org/ocds/ns#initiationTypeTender
+
+:initiationTypeTender rdf:type :InitiationType ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "tender"@en ;
+                      
+                      rdfs:comment "An open competitive bidding or tendering to form contracts. The process generally involves publicly inviting prospective contractors to submit bids for evaluation and selecting a winner or winners."@en ;
+                      
+                      dcterms:title "Tender"@en .
+
+
+
+###  http://w3id.org/ocds/ns#methodLimited
+
+:methodLimited rdf:type :Method ,
+                        owl:NamedIndividual ;
+               
+               rdfs:label "limited"@en ;
+               
+               dcterms:title "Limited"@en ;
+               
+               rdfs:comment "Limited tendering means a procurement method whereby the procuring entity contacts a supplier or suppliers of its choice."@en .
+
+
+
+###  http://w3id.org/ocds/ns#methodOpen
+
+:methodOpen rdf:type :Method ,
+                     owl:NamedIndividual ;
+            
+            rdfs:label "open"@en ;
+            
+            dcterms:title "Open"@en ;
+            
+            rdfs:comment "Open tendering means a procurement method whereby all interested suppliers may submit a tender."@en .
+
+
+
+###  http://w3id.org/ocds/ns#methodSelective
+
+:methodSelective rdf:type :Method ,
+                          owl:NamedIndividual ;
+                 
+                 rdfs:label "selective"@en ;
+                 
+                 dcterms:title "Selective"@en ;
+                 
+                 rdfs:comment "Selective tendering means a procurement method whereby only qualified suppliers are invited by the procuring entity to submit a tender."@en .
 
 
 
@@ -2479,6 +2722,71 @@ rdfs:Resource rdf:type owl:Class .
                         rdfs:comment "An updated to an existing tender release. There should be at least one tender release with the same ocid, but an earlier releaseDate, before a tenderUpdate is published. An update may add new information or make corrections to prior published information. It should not be used for formal legal amendments to a tender, for which the tenderAmendment tag should be used."@en ;
                         
                         dcterms:title "Tender Update"@en .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatusActive
+
+:tenderStatusActive rdf:type :TenderStatus ,
+                             owl:NamedIndividual ;
+                    
+                    rdfs:label "active"@en ;
+                    
+                    rdfs:comment "A tender process is currently taking place."@en ;
+                    
+                    dcterms:title "Active"@en .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatusCancelled
+
+:tenderStatusCancelled rdf:type :TenderStatus ,
+                                owl:NamedIndividual ;
+                       
+                       rdfs:label "cancelled"@en ;
+                       
+                       dcterms:title "Cancelled"@en ;
+                       
+                       rdfs:comment "The tender process has been cancelled."@en .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatusComplete
+
+:tenderStatusComplete rdf:type :TenderStatus ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "complete"@en ;
+                      
+                      dcterms:title "Complete"@en ;
+                      
+                      rdfs:comment "The tender process as unsucessful."@en .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatusPlanned
+
+:tenderStatusPlanned rdf:type :TenderStatus ,
+                              owl:NamedIndividual ;
+                     
+                     rdfs:label "planned"@en ;
+                     
+                     dcterms:title "Planned"@en ;
+                     
+                     rdfs:comment "This tender has been proposed, but is not yet taking place."@en .
+
+
+
+###  http://w3id.org/ocds/ns#tenderStatusUnsuccessful
+
+:tenderStatusUnsuccessful rdf:type :TenderStatus ,
+                                   owl:NamedIndividual ;
+                          
+                          rdfs:label "unsuccessful"@en ;
+                          
+                          rdfs:comment "The tender process as unsucessful."@en ;
+                          
+                          dcterms:title "Unsuccessful"@en .
 
 
 
