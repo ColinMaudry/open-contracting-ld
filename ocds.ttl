@@ -31,6 +31,9 @@
 dcterms:title rdf:type owl:AnnotationProperty .
 
 
+
+
+
 #################################################################
 #
 #    Object Properties
@@ -278,6 +281,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
+###  http://w3id.org/ocds/ns#classificationScheme
+
+:classificationScheme rdf:type owl:FunctionalProperty ,
+                               owl:ObjectProperty ;
+                      
+                      rdfs:label "Classification scheme"@en ;
+                      
+                      rdfs:comment "An classification should be drawn from an existing scheme or list of codes. This field is used to indicate the scheme/codelist from which the classification is drawn. For line item classifications, this value should represent an known [Item Classification Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) wherever possible."@en ;
+                      
+                      rdfs:domain :Classification ;
+                      
+                      rdfs:range :ItemClassificationScheme .
+
+
+
 ###  http://w3id.org/ocds/ns#classificationUri
 
 :classificationUri rdf:type owl:FunctionalProperty ,
@@ -447,6 +465,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
                rdfs:range :Period ;
                
                rdfs:domain :Tender .
+
+
+
+###  http://w3id.org/ocds/ns#former_value
+
+:former_value rdf:type owl:FunctionalProperty ,
+                       owl:ObjectProperty ;
+              
+              rdfs:label "Former value"@en ;
+              
+              rdfs:comment "The previous value of the changed property, in whatever type the property is."@en ;
+              
+              rdfs:domain :Change ;
+              
+              rdfs:range rdfs:Resource .
 
 
 
@@ -1040,21 +1073,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
-###  http://w3id.org/ocds/ns#classificationScheme
-
-:classificationScheme rdf:type owl:ObjectProperty ,
-                               owl:FunctionalProperty ;
-                      
-                      rdfs:label "Classification scheme"@en ;
-                      
-                      rdfs:comment "An classification should be drawn from an existing scheme or list of codes. This field is used to indicate the scheme/codelist from which the classification is drawn. For line item classifications, this value should represent an known [Item Classification Scheme](http://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) wherever possible."@en ;
-                      
-                      rdfs:domain :Classification ;
-                      
-                      rdfs:range :ItemClassificationScheme .
-
-
-
 ###  http://w3id.org/ocds/ns#contactPointName
 
 :contactPointName rdf:type owl:DatatypeProperty ,
@@ -1365,23 +1383,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
         rdfs:domain :Document ;
         
         rdfs:range xsd:string .
-
-
-
-###  http://w3id.org/ocds/ns#former_value
-
-:former_value rdf:type owl:DatatypeProperty ,
-                       owl:FunctionalProperty ;
-              
-              rdfs:label "Former value"@en ;
-              
-              rdfs:comment "The previous value of the changed property, in whatever type the property is."@en ;
-              
-              rdfs:domain :Change ;
-              
-              rdfs:range rdfs:Resource ,
-                         xsd:integer ,
-                         xsd:string .
 
 
 
@@ -1825,15 +1826,15 @@ dcterms:title rdf:type owl:AnnotationProperty .
 ###  http://w3id.org/ocds/ns#streetAddress
 
 :streetAddress rdf:type owl:DatatypeProperty ,
-                       owl:FunctionalProperty ;
-              
-              rdfs:label "Street address"@en ;
-              
-              rdfs:comment "The street address. For example, 1600 Amphitheatre Pkwy"@en ;
-              
-              rdfs:domain :Address ;
-              
-              rdfs:range xsd:string .
+                        owl:FunctionalProperty ;
+               
+               rdfs:label "Street address"@en ;
+               
+               rdfs:comment "The street address. For example, 1600 Amphitheatre Pkwy"@en ;
+               
+               rdfs:domain :Address ;
+               
+               rdfs:range xsd:string .
 
 
 
@@ -2051,6 +2052,7 @@ dcterms:URI rdf:type owl:Class .
         rdfs:comment "This section contain information about the budget line, and associated projects, through which this contracting process is funded. It draws upon data model of the [Budget Data Package](https://github.com/openspending/budget-data-package/blob/master/specification.md), and should be used to cross-reference to more detailed information held using a Budget Data Package, or, where no linked Budget Data Package is available, to provide enough information to allow a user to manually or automatically cross-reference with another published source of budget and project information."@en .
 
 
+
 ###  http://w3id.org/ocds/ns#Change
 
 :Change rdf:type owl:Class ;
@@ -2259,9 +2261,12 @@ rdfs:Resource rdf:type owl:Class .
 
 :ics_CPV rdf:type :ItemClassificationScheme ,
                   owl:NamedIndividual ;
-  rdfs:label "CPV"@en ;
-  dcterms:title "EC Common Procurement Vocabulary"@en ;
-  rdfs:comment "The Common Procurement Vocabulary is a standard adopted by the Commission of the European Community, and consisting of a main vocabulary for defining the subject of a contract, and a supplementary vocabulary for adding further qualitative information. The main vocabulary, identified in OCDS by the code CPV, is based on a tree structure comprising codes of up to 9 digits (an 8 digit code plus a check digit) associated with a wording that describes the type of supplies, works or services forming the subject of the contract."@en .
+         
+         rdfs:label "CPV"@en ;
+         
+         dcterms:title "EC Common Procurement Vocabulary"@en ;
+         
+         rdfs:comment "The Common Procurement Vocabulary is a standard adopted by the Commission of the European Community, and consisting of a main vocabulary for defining the subject of a contract, and a supplementary vocabulary for adding further qualitative information. The main vocabulary, identified in OCDS by the code CPV, is based on a tree structure comprising codes of up to 9 digits (an 8 digit code plus a check digit) associated with a wording that describes the type of supplies, works or services forming the subject of the contract."@en .
 
 
 
@@ -2269,9 +2274,12 @@ rdfs:Resource rdf:type owl:Class .
 
 :ics_CPVS rdf:type :ItemClassificationScheme ,
                    owl:NamedIndividual ;
-  rdfs:label "CPVS"@en ;
-  dcterms:title "EC Common Procurement Vocabulary - Supplementary Codelists"@en ;
-  rdfs:comment "The Common Procurement Vocabulary is a standard adopted by the Commission of the European Community, and consisting of a main vocabulary for defining the subject of a contract, and a supplementary vocabulary for adding further qualitative information. The supplementary vocabulary, identified in OCDS by the code CPVS, is made up of an alphanumeric code with a corresponding wording allowing further details to be added regarding the specific nature or destination of the goods to be purchased."@en .
+          
+          rdfs:label "CPVS"@en ;
+          
+          dcterms:title "EC Common Procurement Vocabulary - Supplementary Codelists"@en ;
+          
+          rdfs:comment "The Common Procurement Vocabulary is a standard adopted by the Commission of the European Community, and consisting of a main vocabulary for defining the subject of a contract, and a supplementary vocabulary for adding further qualitative information. The supplementary vocabulary, identified in OCDS by the code CPVS, is made up of an alphanumeric code with a corresponding wording allowing further details to be added regarding the specific nature or destination of the goods to be purchased."@en .
 
 
 
@@ -2279,9 +2287,12 @@ rdfs:Resource rdf:type owl:Class .
 
 :ics_GSIN rdf:type :ItemClassificationScheme ,
                    owl:NamedIndividual ;
-  rdfs:label "GSIN"@en ;
-  dcterms:title "Goods and Services Identification Number"@en ;
-  rdfs:comment "The Canadia federal government uses Goods and Services Identification Number (GSIN) codes to identify generic product descriptions for its procurement activities. The full list is published and maintained at buyandsell.gc.ca"@en .
+          
+          rdfs:label "GSIN"@en ;
+          
+          dcterms:title "Goods and Services Identification Number"@en ;
+          
+          rdfs:comment "The Canadia federal government uses Goods and Services Identification Number (GSIN) codes to identify generic product descriptions for its procurement activities. The full list is published and maintained at buyandsell.gc.ca"@en .
 
 
 
@@ -2289,10 +2300,12 @@ rdfs:Resource rdf:type owl:Class .
 
 :ics_UNSPSC rdf:type :ItemClassificationScheme ,
                      owl:NamedIndividual ;
-
-  rdfs:label "UNSPSC"@en ;
-  rdfs:comment "The United Nations Standard Products and Services Code (UNSPSC) is a hierarchical convention that is used to classify all products and services. Machine readable meta-data for UNSPSC is not provided as open data: and so publishers should consider alternative classification shemes that do provide open data lookup tables wherever possible."@en ;
-  dcterms:title "United Nations Standard Products and Services Code®"@en .
+            
+            rdfs:label "UNSPSC"@en ;
+            
+            rdfs:comment "The United Nations Standard Products and Services Code (UNSPSC) is a hierarchical convention that is used to classify all products and services. Machine readable meta-data for UNSPSC is not provided as open data: and so publishers should consider alternative classification shemes that do provide open data lookup tables wherever possible."@en ;
+            
+            dcterms:title "United Nations Standard Products and Services Code®"@en .
 
 
 
