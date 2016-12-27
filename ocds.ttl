@@ -41,9 +41,9 @@ dcterms:title rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://w3id.org/ocds/ns#BudgetSource
+###  http://w3id.org/ocds/ns#budgetSource
 
-:BudgetSource rdf:type owl:FunctionalProperty ,
+:budgetSource rdf:type owl:FunctionalProperty ,
                        owl:ObjectProperty ;
               
               rdfs:label "Budget Data Source"@en ;
