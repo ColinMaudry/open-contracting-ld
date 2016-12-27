@@ -41,21 +41,6 @@ dcterms:title rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://w3id.org/ocds/ns#budgetSource
-
-:budgetSource rdf:type owl:FunctionalProperty ,
-                       owl:ObjectProperty ;
-              
-              rdfs:label "Budget Data Source"@en ;
-              
-              rdfs:comment "Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here." ;
-              
-              rdfs:domain :Budget ;
-              
-              rdfs:range rdfs:Resource .
-
-
-
 ###  http://w3id.org/ocds/ns#additionalClassifications
 
 :additionalClassifications rdf:type owl:ObjectProperty ;
@@ -234,6 +219,21 @@ dcterms:title rdf:type owl:AnnotationProperty .
               rdfs:domain :Budget ;
               
               rdfs:range :Value .
+
+
+
+###  http://w3id.org/ocds/ns#budgetSource
+
+:budgetSource rdf:type owl:FunctionalProperty ,
+                       owl:ObjectProperty ;
+              
+              rdfs:label "Budget Data Source"@en ;
+              
+              rdfs:comment "Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here." ;
+              
+              rdfs:domain :Budget ;
+              
+              rdfs:range rdfs:Resource .
 
 
 
@@ -2384,6 +2384,17 @@ rdfs:Resource rdf:type owl:Class .
 #################################################################
 
 
+###  http://w3id.org/ocds/ns#awardCriteriaBestProposal
+
+:awardCriteriaBestProposal rdf:type :AwardCriteria ,
+                                    owl:NamedIndividual ;
+                           
+                           rdfs:label "bestProposal"@en ;
+                           
+                           dcterms:title "Best Proposal Cost"@en .
+
+
+
 ###  http://w3id.org/ocds/ns#awardCriteriaBestValueToGovernment
 
 :awardCriteriaBestValueToGovernment rdf:type :AwardCriteria ,
@@ -2466,17 +2477,6 @@ rdfs:Resource rdf:type owl:Class .
                          rdfs:comment "This award could not be successfully made. If items or supplier details are included within the award section, then these narrow the scope of the unsuccessful award (i.e. the award of noted items, or an award to the noted supplier, was unsuccessful, but there may be other successful awards for different items listed in the tender, or to different suppliers)."@en ;
                          
                          dcterms:title "Unsuccessful"@en .
-
-
-
-###  http://w3id.org/ocds/ns#bestProposal
-
-:bestProposal rdf:type :AwardCriteria ,
-                       owl:NamedIndividual ;
-              
-              rdfs:label "bestProposal"@en ;
-              
-              dcterms:title "Best Proposal Cost"@en .
 
 
 
