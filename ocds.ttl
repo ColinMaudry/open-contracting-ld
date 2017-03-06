@@ -1,6 +1,7 @@
 @prefix : <http://w3id.org/ocds/ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix seq: <http://www.ontologydesignpatterns.org/cp/owl/sequence.owl#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -11,6 +12,8 @@
 <http://w3id.org/ocds/ns#> rdf:type owl:Ontology ;
                            
                            dcterms:title "Schema for an Open Contracting Release"@en ;
+                           
+                           owl:imports <http://www.ontologydesignpatterns.org/cp/owl/sequence.owl> ;
                            
                            dcterms:license <https://creativecommons.org/licenses/by/2.0/> ;
                            
@@ -148,6 +151,18 @@ dcterms:title rdf:type owl:AnnotationProperty .
              rdfs:range :Period ;
              
              rdfs:domain :Tender .
+
+
+
+###  http://w3id.org/ocds/ns#awardPrecedes
+
+:awardPrecedes rdf:type owl:ObjectProperty ;
+               
+               rdfs:domain :Award ;
+               
+               rdfs:range :Contract ;
+               
+               rdfs:subPropertyOf seq:directlyPrecedes .
 
 
 
@@ -688,6 +703,18 @@ dcterms:title rdf:type owl:AnnotationProperty .
 
 
 
+###  http://w3id.org/ocds/ns#planningPrecedes
+
+:planningPrecedes rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:domain :Planning ;
+                  
+                  rdfs:range :Tender ;
+                  
+                  rdfs:subPropertyOf seq:directlyPrecedes .
+
+
+
 ###  http://w3id.org/ocds/ns#procurementMethod
 
 :procurementMethod rdf:type owl:FunctionalProperty ,
@@ -844,6 +871,18 @@ dcterms:title rdf:type owl:AnnotationProperty .
               rdfs:range :Period ;
               
               rdfs:domain :Tender .
+
+
+
+###  http://w3id.org/ocds/ns#tenderPrecedes
+
+:tenderPrecedes rdf:type owl:ObjectProperty ;
+                
+                rdfs:range :Award ;
+                
+                rdfs:domain :Tender ;
+                
+                rdfs:subPropertyOf seq:directlyPrecedes .
 
 
 
