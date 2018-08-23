@@ -1,3 +1,7 @@
+**The development of this project is suspended as I believe the [e-Procurement ontology](https://github.com/eprocurementontology/eprocurementontology) initiative is more promising.**
+
+Many thanks to those who contributed.
+
 ## Open Contracting Data Standard - Linked Data Edition
 
 This project aims at enabling any JSON data that complies with the [OCDS JSON Schema](http://standard.open-contracting.org/latest/en/schema/) to be published as [Linked Data](https://www.w3.org/standards/semanticweb/data).
@@ -13,7 +17,7 @@ The **[OCDS](http://standard.open-contracting.org/latest/en/)** is a data model 
 - the description of the resource contains relations to other resources, also identified with URIs.
 
 The result: a meshed network of resources than can easily be traversed by a machine.
-
+)
 **[RDF](https://www.w3.org/TR/2014/NOTE-rdf11-primer-20140225/#section-Introduction)** is the framework that powers Linked Data.
 
 ### An RDF/Linked Data variant of the Open Contracting Data Standard (OCDS) JSON Schema.
